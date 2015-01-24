@@ -5,6 +5,7 @@ Requires: python
 # Patch0: cherrypy-upload
 # Patch1: cherrypy-trailers
 # Patch2: cherrypy-report-all-bytes
+Patch0: cherrypy-fixssl
 
 %prep
 %setup -n CherryPy-%realversion
@@ -12,6 +13,7 @@ Requires: python
 # %patch0 -p1
 # %patch1 -p1
 # %patch2 -p1
+%patch0 -p1
 
 %build
 python setup.py build
