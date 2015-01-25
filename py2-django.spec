@@ -1,18 +1,13 @@
-### RPM external py2-cjson 1.0.5
-## INITENV +PATH PYTHONPATH %i/$PYTHON_LIB_SITE_PACKAGES
-
-Source: http://pypi.python.org/packages/source/p/python-cjson/python-cjson-%{realversion}.tar.gz
-Requires: python
+### RPM external py2-django 1.7.3
+## INITENV +PATH PYTHONPATH %i/lib/python`echo $PYTHON_VERSION | cut -d. -f 1,2`/site-packages
+Source: none
+Requires: python py2-pip
 
 %prep
-%setup -n python-cjson-%realversion
 
 %build
-python setup.py build
-
 %install
-python setup.py install --prefix=%i
-find %i -name '*.egg-info' -exec rm {} \;
+pip install --install-option="--prefix=%i" --ignore-installed django
 
 # Generate dependencies-setup.{sh,csh} so init.{sh,csh} picks full environment.
 mkdir -p %i/etc/profile.d

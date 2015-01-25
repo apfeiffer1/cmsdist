@@ -1,18 +1,33 @@
-### RPM external py2-cjson 1.0.5
-## INITENV +PATH PYTHONPATH %i/$PYTHON_LIB_SITE_PACKAGES
-
-Source: http://pypi.python.org/packages/source/p/python-cjson/python-cjson-%{realversion}.tar.gz
+### RPM external py2-pip 6.0.6
+## INITENV +PATH PYTHONPATH %i/lib/python`echo $PYTHON_VERSION | cut -d. -f 1,2`/site-packages
+Source: none
 Requires: python
 
 %prep
-%setup -n python-cjson-%realversion
 
 %build
-python setup.py build
+DOWNLOAD_TOOL=$(basename $(which curl || which wget || echo "none"))
+DOWNLOAD_FILE=https://bootstrap.pypa.io/get-pip.py
+
+case "${DOWNLOAD_TOOL}" in
+   curl)
+      # cURL does not download empty files, touch file before downloading
+      curl -L -O -k ${DOWNLOAD_FILE}
+      ;;
+   wget)
+      wget --no-check-certificate --no-verbose ${DOWNLOAD_FILE}
+      ;;
+   none)
+      echo "Unsupported download tool. Could not locate curl or wget. Contact package maintainer."
+      exit 1
+      ;;
+esac
+
+# wget https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
+
 
 %install
-python setup.py install --prefix=%i
-find %i -name '*.egg-info' -exec rm {} \;
 
 # Generate dependencies-setup.{sh,csh} so init.{sh,csh} picks full environment.
 mkdir -p %i/etc/profile.d
