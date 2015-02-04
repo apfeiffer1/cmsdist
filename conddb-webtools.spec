@@ -1,4 +1,4 @@
-### RPM cms conddb-webtools 2.3
+### RPM cms conddb-webtools 2.4
 ## NOCOMPILER
 # with cmsBuild, change the above version only when a new tool is added
 Source: none
