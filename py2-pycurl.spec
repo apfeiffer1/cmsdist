@@ -1,7 +1,7 @@
 ### RPM external py2-pycurl 7.19.0
 ## INITENV +PATH PYTHONPATH %i/$PYTHON_LIB_SITE_PACKAGES
 Source: http://pycurl.sourceforge.net/download/pycurl-%realversion.tar.gz
-Requires: python curl
+Requires: python curl py2-pyopenssl
 
 %prep
 %setup -n pycurl-%realversion
