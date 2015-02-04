@@ -1,13 +1,17 @@
-### RPM external py2-django 1.7.3
+### RPM external py2-django 1.4.1
 ## INITENV +PATH PYTHONPATH %i/lib/python`echo $PYTHON_VERSION | cut -d. -f 1,2`/site-packages
-Source: none
-Requires: python py2-pip
+Source: https://www.djangoproject.com/m/releases/1.4/Django-1.4.1.tar.gz
+Requires: python py2-setuptools
 
 %prep
+%setup -n Django-%realversion
 
 %build
+python setup.py build
+
 %install
-pip install --install-option="--prefix=%i" --ignore-installed django
+python setup.py install --prefix=%i
+find %i -name '*.egg-info' -exec rm {} \;
 
 # Generate dependencies-setup.{sh,csh} so init.{sh,csh} picks full environment.
 mkdir -p %i/etc/profile.d
