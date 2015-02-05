@@ -1,8 +1,9 @@
-### RPM external py2-pyopenssl 0.11
+### RPM external py2-pyopenssl 0.14
 ## INITENV +PATH PYTHONPATH %i/$PYTHON_LIB_SITE_PACKAGES
 
-Source: https://launchpad.net/pyopenssl/main/%realversion/+download/pyOpenSSL-%realversion.tar.gz
-Requires: python openssl
+Source: https://pypi.python.org/packages/source/p/pyOpenSSL/pyOpenSSL-%realversion.tar.gz
+# md5=8579ff3a1d858858acfba5f046a4ddf7
+Requires: python openssl py2-setuptools
 
 %prep
 %setup -n pyOpenSSL-%realversion
@@ -17,7 +18,10 @@ CMS_EOF
 python setup.py build 
 
 %install
-python setup.py install --prefix=%i
+mkdir -p %{i}/${PYTHON_LIB_SITE_PACKAGES}
+export PYTHONPATH=%{i}/${PYTHON_LIB_SITE_PACKAGES}:${PYTHONPATH}
+
+python setup.py install --single-version-externally-managed --record=/dev/null --skip-build --prefix=%i
 find %i -name '*.egg-info' -exec rm {} \;
 
 # Generate dependencies-setup.{sh,csh} so init.{sh,csh} picks full environment.
