@@ -1,4 +1,4 @@
-### RPM cms conddb-webtools 2.4
+### RPM cms conddb-webtools 2.6
 ## NOCOMPILER
 # with cmsBuild, change the above version only when a new tool is added
 Source: none
@@ -16,6 +16,7 @@ Requires: py2-cjson
 Requires: py2-lint
 Requires: py2-pyopenssl
 Requires: py2-django
+Requires: python-ldap
 
 %define skipreqtools jcompiler lhapdfwrapfull lhapdffull icc-cxxcompiler icc-ccompiler icc-f77compiler boost_serialization boost_iostreams
 
