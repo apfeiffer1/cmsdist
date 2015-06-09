@@ -1,14 +1,12 @@
-### RPM external py2-pycrypto 2.0.1 
+### RPM external py2-pycrypto 2.6.1 
 %define downloadn pycrypto
 Requires: python gmp
 ## INITENV +PATH PYTHONPATH %i/lib/python%{pythonv}`echo $PYTHON_VERSION | cut -d. -f 1,2`/site-packages
 %define pythonv %(echo $PYTHON_VERSION | cut -d. -f 1,2)
-Source: http://www.amk.ca/files/python/crypto/%downloadn-%realversion.tar.gz 
-Patch: py2-pycrypto-setup
+Source: https://pypi.python.org/packages/source/p/pycrypto/pycrypto-%{realversion}.tar.gz
 
 %prep
 %setup -n %downloadn-%realversion
-%patch0 -p0
 %build
 %install
 python setup.py install --prefix=%i
