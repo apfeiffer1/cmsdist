@@ -5,7 +5,7 @@ Source: https://pypi.python.org/packages/source/r/requests/requests-%{realversio
 Requires: python 
 
 %prep
-%setup -n Requests-%{realversion}
+%setup -n requests-%{realversion}
 
 %build
 python setup.py build
